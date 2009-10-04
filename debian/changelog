@@ -1,0 +1,157 @@
+xresprobe (0.4.24ubuntu9) karmic; urgency=low
+
+  * ddcprobe/lrmi.c:
+    - Define *_MASK to fix FTBFS on newer kernels.
+
+ -- Chris Coulson <chrisccoulson@ubuntu.com>  Sun, 04 Oct 2009 01:29:02 +0100
+
+xresprobe (0.4.24ubuntu8) gutsy; urgency=low
+
+  * Fix typo in previous upload
+
+ -- Bryce Harrington <bryce@ubuntu.com>  Mon, 15 Oct 2007 01:53:14 -0700
+
+xresprobe (0.4.24ubuntu7) gutsy; urgency=low
+
+  * Expanding the previous xprobe.sh fix, to prevent calling
+    xprobe.sh for -intel even if the ddcprobe failed.  
+    (Re-closes LP:  #127008)
+
+ -- Bryce Harrington <bryce@ubuntu.com>  Mon, 15 Oct 2007 00:18:33 -0700
+
+xresprobe (0.4.24ubuntu6) gutsy; urgency=low
+
+  [Tormod Volden]
+  * lcdsize.sh: fix vesa sed regexp so that resolutions are returned
+    correctly without trailing text.
+
+ -- Timo Aaltonen <tepsipakki@ubuntu.com>  Wed, 10 Oct 2007 18:21:05 +0300
+
+xresprobe (0.4.24ubuntu5) gutsy; urgency=low
+
+  * xorg.conf: Fix xprobe.sh failure caused by missing type1 module;
+    this was dropped by Debian for xserver 1.3 since it's obsolete and
+    has some security issues.  (Addresses portion of fix for 127008)
+  * xresprobe: Fix issue in alternate installation for Intel gfx laptops
+    resulting in screen to be replaced by flashing colored blocks, by
+    making xresprobe use ddcprobe instead of xprobe for laptops using
+    the -intel driver.  (Closes LP: #127008 and many, many duplicates)
+  * ddcprobe.sh: Fix resolution detection error where LCD's would get
+    configured to use one resolution less than their maximum because
+    ddcprobe cannot tell the difference between an analog attached LCD
+    and a CRT.  (Closes LP: #27667)
+
+ -- Bryce Harrington <bryce@ubuntu.com>  Thu, 27 Sep 2007 17:57:22 -0700
+
+xresprobe (0.4.24ubuntu4) gutsy; urgency=low
+
+  * Add support for the Intel driver 
+
+ -- Matthew Garrett <mjg59@srcf.ucam.org>  Fri, 10 Aug 2007 21:15:44 +0100
+
+xresprobe (0.4.24ubuntu3) feisty; urgency=low
+
+  * xprobe.sh: use autoprobing only if the driver is vesa.
+
+ -- Timo Aaltonen <tepsipakki@ubuntu.com>  Thu,  8 Mar 2007 12:14:54 +0200
+
+xresprobe (0.4.24ubuntu2) feisty; urgency=low
+
+  * lcdsize.sh: add a missing 'getres'.
+
+ -- Timo Aaltonen <tepsipakki@ubuntu.com>  Wed,  7 Mar 2007 20:34:43 +0200
+
+xresprobe (0.4.24ubuntu1) feisty; urgency=low
+
+  * lcdsize.sh:
+    - Add support for vesa.
+  * xprobe.sh:
+    - Don't use the bare-bones config, instead rely on the new xserver
+      to be clever.
+  * debian/control:
+    - Change the Maintainer address.
+
+ -- Timo Aaltonen <tepsipakki@ubuntu.com>  Wed,  7 Mar 2007 15:57:51 +0200
+
+xresprobe (0.4.24) edgy; urgency=low
+
+  * Fix bashism in ddcprobe.sh.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 17 Jul 2006 21:20:13 +0100
+
+xresprobe (0.4.23debian1) unstable; urgency=low
+
+  * New release based in 0.4.23 release of Ubuntu.
+    - Fixed FTBFS bug (closes: #358334)
+  * Fix bashism on xresprobe script (closes: #318215)
+  * Stop to install Ubuntu changelog since we're using the same changelog
+    file right now.
+
+ -- Otavio Salvador <otavio@debian.org>  Sat,  8 Apr 2006 11:00:30 -0300
+
+xresprobe (0.4.23) dapper; urgency=low
+
+  * Fix vbe_get_vbe_info in stub.c to match the declaration.
+
+ -- LaMont Jones <lamont@ubuntu.com>  Wed, 22 Mar 2006 16:11:56 -0700
+
+xresprobe (0.4.22-1) unstable; urgency=low
+
+  * New upstream release
+  * Add myself to uploaders, since octavio didn't grab this after a month
+
+ -- David Nusinow <dnusinow@debian.org>  Tue, 21 Mar 2006 22:03:54 -0500
+
+xresprobe (0.4.22) dapper; urgency=low
+
+  * More AMD64 support.  Reset the stack pointer on each call to LRMI_int
+    (unless overridden in regs).  Without this, the second call to
+    LRMI_int will always fail due to the stack size being too small.
+
+ -- Tollef Fog Heen <tfheen@ubuntu.com>  Mon, 20 Feb 2006 13:55:47 +0100
+
+xresprobe (0.4.21) dapper; urgency=low
+
+  * Add support for amd64.  Take the thunking/x86emu parts from vbetool
+    and reuse them here.  Great and many thanks go to both Matthew Garrett
+    and the people who wrote x86emu.
+
+ -- Tollef Fog Heen <tfheen@ubuntu.com>  Mon, 13 Feb 2006 14:42:03 +0100
+
+xresprobe (0.4.20) dapper; urgency=low
+
+  * Call Xorg explicitly, instead of guessing through the symlink.
+  * ddcprobe: Dump the EDID for debugging purposes.
+
+ -- Daniel Stone <daniel.stone@ubuntu.com>  Tue, 25 Oct 2005 19:27:17 +1000
+
+xresprobe (0.4.19) breezy; urgency=low
+
+  * Apply Debian patch to fix CRT/LCD regexp in ddcprobe.sh (closes: #328551).
+  * Remap 1408x1050 to 1400x1050 by force on savages.  Yes, I know this is a
+    horror freak show (closes: Ubuntu#15231).
+
+ -- Daniel Stone <daniel.stone@ubuntu.com>  Fri, 16 Sep 2005 17:36:42 +1000
+
+xresprobe (0.4.18-1) unstable; urgency=low
+
+  * New upstream release.
+    - FTBFS: missing stubs on several architectures. Closes: #309491;
+
+ -- Otavio Salvador <otavio@debian.org>  Wed, 18 May 2005 00:43:19 -0300
+
+xresprobe (0.4.16-1) unstable; urgency=low
+
+  * Initial version for Debian.
+  * Replace kudzu-vesa and then allow upgrades from woody.
+  * Use simple-patch support of CDBS build system to apply patches in
+    build time to fix issues while these patches weren't include by
+    upstream.
+  * debian/patches/10_gcc_2.95_fixes.diff: Added, while we were working on
+    0.4.14, to fix some compilation issues Petter Reinholdtsen
+    <pere@hungry.com> for the patch.
+  * debian/patches/10_gcc_2.95_fixes.diff: Droped since was merged on
+    0.4.16 upstream release.
+  
+ -- Otavio Salvador <otavio@debian.org>  Mon,  4 Apr 2005 11:15:24 -0300
+
